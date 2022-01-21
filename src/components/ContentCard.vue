@@ -26,7 +26,7 @@
         size="normal"
       />
       <h3 v-else>{{ this.movieData.original_language }}</h3>
-      <h4>{{ fiveStarVote }}<font-awesome-icon icon="coffee" /></h4>
+      <h4>{{ fiveStarVote }}<font-awesome-icon icon="star" /></h4>
     </div>
   </li>
 </template>

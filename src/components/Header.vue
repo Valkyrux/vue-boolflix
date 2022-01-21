@@ -1,5 +1,6 @@
 <template>
   <header class="d-flex align-items-center justify-content-between ps-2 pe-4">
+    <font-awesome-icon icon="star" />
     <nav class="h-100">
       <img src="../assets/logo.png" class="h-100 p-2" alt="logo" />
       <TypeOfSearchButton
