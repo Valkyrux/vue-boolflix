@@ -1,7 +1,10 @@
 <template>
   <div id="app">
-    <Header @startSearch="setSearchText($event)" />
-    <ContentContainer :giveMeText="searchText" />
+    <Header
+      @startSearch="setSearchText($event)"
+      @typeOfSearch="setTypeOfSearch($event)"
+    />
+    <ContentContainer :giveMeText="searchText" :giveMeType="typeOfSearch" />
   </div>
 </template>
 
@@ -14,11 +17,15 @@ export default {
   data() {
     return {
       searchText: "",
+      typeOfSearch: "all",
     };
   },
   methods: {
     setSearchText(textFromInput) {
       this.searchText = textFromInput;
+    },
+    setTypeOfSearch(typeClicked) {
+      this.typeOfSearch = typeClicked;
     },
   },
   components: {

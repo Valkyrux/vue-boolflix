@@ -1,12 +1,21 @@
 <template>
-  <header class="d-flex align-items-center justify-content-between ps-3 pe-4">
+  <header class="d-flex align-items-center justify-content-between ps-2 pe-4">
     <nav class="h-100">
-      <img src="../assets/logo.png" class="h-100 p-1" alt="logo" />
-      <TypeOfSearchButton :category="'Film'" />
-      <TypeOfSearchButton :category="'Serie TV'" />
-      <TypeOfSearchButton :category="'Tutti'" />
+      <img src="../assets/logo.png" class="h-100 p-2" alt="logo" />
+      <TypeOfSearchButton
+        :category="'Film'"
+        @typeOfSearch="$emit('typeOfSearch', categoryFormatForSearch($event))"
+      />
+      <TypeOfSearchButton
+        :category="'Serie TV'"
+        @typeOfSearch="$emit('typeOfSearch', categoryFormatForSearch($event))"
+      />
+      <TypeOfSearchButton
+        :category="'Tutti'"
+        @typeOfSearch="$emit('typeOfSearch', categoryFormatForSearch($event))"
+      />
     </nav>
-    <InputTextButton />
+    <InputTextButton @startSearch="$emit('startSearch', $event)" />
   </header>
 </template>
 
@@ -16,21 +25,33 @@ import InputTextButton from "./InputTextButton.vue";
 
 export default {
   name: "Header",
-  data() {
-    return {
-      typeOfSearch: "all",
-      searchText: "",
-    };
-  },
+  //   data() {
+  //     return {
+  //       TypeOfSearch: "all",
+  //       searchText: "",
+  //     };
+  //   },
   components: {
     TypeOfSearchButton,
     InputTextButton,
+  },
+  methods: {
+    categoryFormatForSearch(element) {
+      switch (element) {
+        case "Film":
+          return "movie";
+        case "Serie TV":
+          return "tv";
+        case "Tutti":
+          return "all";
+      }
+    },
   },
 };
 </script>
 
 <style lang="scss">
 header {
-  height: 60px;
+  height: 50px;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div>
     <input type="text" v-model="inputText" placeholder="Inserisci Titolo" />
-    <button @click="$emit('startSearch', getInputText())">Cerca</button>
+    <button @click="$emit('startSearch', inputText)">Cerca</button>
   </div>
 </template>
 
@@ -13,13 +13,13 @@ export default {
       inputText: "",
     };
   },
-  methods: {
-    getInputText() {
-      const searcInputText = this.inputText;
-      this.inputText = "";
-      return searcInputText;
-    },
-  },
+  // methods: {
+  //   getInputText() {
+  //     const searcInputText = this.inputText;
+  //     this.inputText = "";
+  //     return searcInputText;
+  //   },
+  // },
 };
 </script>
 

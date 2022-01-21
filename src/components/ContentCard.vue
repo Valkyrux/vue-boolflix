@@ -1,9 +1,12 @@
 <template>
   <li>
     <img
+      v-if="movieData.poster_path"
+      class="w-100"
       :src="'https://image.tmdb.org/t/p/w342' + movieData.poster_path"
       alt=""
     />
+    <div v-else>No Image</div>
     <h2>{{ movieData.title }}</h2>
     <h2>{{ movieData.original_title }}</h2>
     <CountryFlag v-if="isThereTheIcon" :country="generateIcon" size="normal" />
