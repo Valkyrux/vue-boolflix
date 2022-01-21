@@ -1,8 +1,8 @@
 <template>
-  <div class="container pt-5 pb-5">
+  <div class="container-fluid pt-5 pb-5">
     <ul v-if="items" class="row">
       <ContentCard
-        class="col-2 p-0"
+        class="col-2 p-1"
         :movieData="movie"
         v-for="(movie, index) in items"
         :key="index"
@@ -107,4 +107,9 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+ul {
+  padding: 20px;
+  list-style-type: none;
+}
+</style>

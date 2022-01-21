@@ -1,5 +1,5 @@
 <template>
-  <button @click="$emit('typeOfSearch', category)" class="h-100">
+  <button @click="$emit('typeOfSearch', category)" class="h-100 fw-bold">
     {{ category }}
   </button>
 </template>
