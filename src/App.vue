@@ -1,13 +1,12 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <InputTextButton @startSearch="setSearchText($event)" />
+    <Header @startSearch="setSearchText($event)" />
     <ContentContainer :giveMeText="searchText" />
   </div>
 </template>
 
 <script>
-import InputTextButton from "./components/InputTextButton.vue";
+import Header from "./components/Header.vue";
 import ContentContainer from "./components/ContentContainer.vue";
 
 export default {
@@ -23,7 +22,7 @@ export default {
     },
   },
   components: {
-    InputTextButton,
+    Header,
     ContentContainer,
   },
 };
@@ -31,12 +30,16 @@ export default {
 
 <style lang="scss">
 @import "~bootstrap/scss/bootstrap";
+@import "./assets/scss/_variables.scss";
+
+body {
+  background-color: $black;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
