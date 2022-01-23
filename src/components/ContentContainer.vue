@@ -68,7 +68,6 @@ export default {
           .then((response) => {
             this.items = this.items.concat(response.data.results);
             console.log(response.data.results);
-            console.log("ciro");
             axios
               .get(`https://api.themoviedb.org/3/search/tv/`, {
                 params: {
@@ -101,7 +100,9 @@ export default {
       }
     },
     giveMeType(value) {
-      this.getMoviesFromApi(this.giveMeText, value);
+      if (this.giveMeText != "") {
+        this.getMoviesFromApi(this.giveMeText, value);
+      }
     },
   },
 };

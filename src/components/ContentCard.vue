@@ -17,16 +17,43 @@
       No Image
     </div>
     <div class="position-absolute fixed-dimension info">
-      <h2>{{ movieData.title }}</h2>
-      <h2>{{ movieData.original_title }}</h2>
-      <CountryFlag
-        class="rounded"
-        v-if="isThereTheIcon"
-        :country="generateIcon"
-        size="normal"
-      />
-      <h3 v-else>{{ this.movieData.original_language }}</h3>
-      <h4>{{ fiveStarVote }}<font-awesome-icon icon="star" /></h4>
+      <div class="p-3">
+        <h2 class="text-start fs-6 ms_title">
+          <span class="ms_label">Titolo </span>"{{ generateTitle }}"
+        </h2>
+        <h2 class="text-start fs-6 ms_title">
+          <span class="ms_label">Titolo originale </span>"{{
+            generateOriginalTitle
+          }}"
+        </h2>
+        <p class="ms_overview" v-if="this.movieData.overview">
+          "{{ briefDescription }}"
+        </p>
+        <p v-else>Nessuna descrizione</p>
+        <CountryFlag
+          class="rounded"
+          v-if="isThereTheIcon"
+          :country="generateIcon"
+          size="normal"
+        />
+        <h3 v-else>{{ this.movieData.original_language }}</h3>
+        <div class="ms_title">
+          <span v-if="fiveStarVote != 0">
+            <font-awesome-icon
+              v-for="n in fiveStarVote"
+              :icon="['fas', 'star']"
+              :key="n + 'star'"
+            />
+          </span>
+          <span v-if="5 - fiveStarVote != 0">
+            <font-awesome-icon
+              v-for="n in 5 - fiveStarVote"
+              :icon="['far', 'star']"
+              :key="n + 'star'"
+            />
+          </span>
+        </div>
+      </div>
     </div>
   </li>
 </template>
@@ -68,13 +95,44 @@ export default {
       }
     },
     fiveStarVote() {
-      return this.movieData.vote_average / 2;
+      let aGoodNumber = this.movieData.vote_average / 2;
+      if (aGoodNumber - parseInt(aGoodNumber) > 0.5) {
+        aGoodNumber = parseInt(aGoodNumber) + 1;
+      } else {
+        aGoodNumber = parseInt(aGoodNumber);
+      }
+      return aGoodNumber;
+    },
+    generateTitle() {
+      if (this.movieData.title) {
+        return this.movieData.title;
+      } else {
+        return this.movieData.name;
+      }
+    },
+    generateOriginalTitle() {
+      if (this.movieData.original_title) {
+        return this.movieData.original_title;
+      } else {
+        return this.movieData.original_name;
+      }
+    },
+    briefDescription() {
+      if (this.movieData.overview) {
+        const briefText = this.movieData.overview
+          .split("")
+          .filter((element, index) => index < 80);
+        return briefText.join("") + "...";
+      } else {
+        return null;
+      }
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
+@import "../assets/scss/_variables.scss";
 .img-container {
   background-color: black;
 }
@@ -93,5 +151,20 @@ li:hover .info {
 .fixed-dimension {
   width: calc(100% - 8px);
   height: calc(100% - 8px);
+}
+
+.ms_label {
+  color: $red;
+  font-weight: bold;
+  font-size: 0.9em;
+}
+
+.ms_title {
+  color: white;
+}
+
+.ms_overview {
+  max-height: 40%;
+  overflow: hidden;
 }
 </style>
